@@ -1,0 +1,542 @@
+<!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Writing good prompts | Build Agent hackathon</title>
+<meta name="description" content="Guides for planning, building and demoing an app with ServiceNow Build Agent at a hackathon.">
+<link rel="stylesheet" href="assets/style.css"></head><body data-page="03-writing-good-prompts"><div class="container"><header class="site"><a class="brand" href="index.html" aria-label="Build Agent hackathon home"><svg xmlns="http://www.w3.org/2000/svg" width="132" height="20" viewBox="0 0 132 20"><path d="M32.022,6.391a5.626,5.626,0,0,0-3.61,1.3V6.523H25.119V19.35h3.425v-8.2a4.073,4.073,0,0,1,3.109-1.588,3.494,3.494,0,0,1,1.374.206V6.479a5.851,5.851,0,0,0-1.005-.088" fill="#ffffff" fill-rule="evenodd"/><path d="M2.16,15.436a5.369,5.369,0,0,0,3.5,1.269c.922,0,1.633-.45,1.633-1.084,0-1.931-6.191-1.243-6.191-5.369,0-2.459,2.371-3.993,4.9-3.993a7.9,7.9,0,0,1,4.32,1.3L8.72,10.04a4.3,4.3,0,0,0-2.45-.872c-.948,0-1.739.37-1.739,1.031,0,1.666,6.192,1.005,6.192,5.448,0,2.46-2.4,3.967-5.085,3.967A8.815,8.815,0,0,1,.5,17.9Z" fill="#ffffff" fill-rule="evenodd"/><path d="M23.657,12.817c0-3.57-2.5-6.558-6.034-6.558-3.794,0-6.218,3.12-6.218,6.691A6.4,6.4,0,0,0,18.1,19.614a6.919,6.919,0,0,0,5.243-2.3l-1.95-1.957a4.515,4.515,0,0,1-3.214,1.481A3.36,3.36,0,0,1,14.725,13.8h8.853A5.735,5.735,0,0,0,23.657,12.817Zm-8.774-1.533a2.775,2.775,0,0,1,2.74-2.248,2.552,2.552,0,0,1,2.53,2.248Z" fill="#ffffff" fill-rule="evenodd"/><polygon points="41.19 14.351 44.694 6.523 48.252 6.523 42.376 19.35 40.005 19.35 34.129 6.523 37.686 6.523 41.19 14.351" fill="#ffffff" fill-rule="evenodd"/><path d="M51.128.5A2.2,2.2,0,1,1,48.888,2.7,2.2,2.2,0,0,1,51.128.5" fill="#ffffff" fill-rule="evenodd"/><rect x="49.415" y="6.523" width="3.425" height="12.827" fill="#ffffff"/><path d="M67,16.731a6.766,6.766,0,0,1-5.8,2.883,6.68,6.68,0,1,1,.026-13.355,6.808,6.808,0,0,1,5.375,2.565l-2.424,2.142a3.7,3.7,0,0,0-2.951-1.534A3.433,3.433,0,0,0,57.78,12.95a3.383,3.383,0,0,0,3.531,3.49,3.741,3.741,0,0,0,3.056-1.692Z" fill="#ffffff" fill-rule="evenodd"/><path d="M79.442,17.313a6.918,6.918,0,0,1-5.243,2.3,6.4,6.4,0,0,1-6.692-6.664c0-3.571,2.424-6.691,6.218-6.691,3.53,0,6.033,2.988,6.033,6.558a5.635,5.635,0,0,1-.079.979H70.826a3.36,3.36,0,0,0,3.452,3.041,4.52,4.52,0,0,0,3.215-1.481Zm-3.188-6.029a2.551,2.551,0,0,0-2.529-2.248,2.774,2.774,0,0,0-2.74,2.248Z" fill="#ffffff" fill-rule="evenodd"/><path d="M81.12,19.35V6.523h3.293V7.554a5.625,5.625,0,0,1,3.609-1.295,5.747,5.747,0,0,1,4.427,2.063,6.482,6.482,0,0,1,1.317,4.5V19.35H90.341v-6.8a3.11,3.11,0,0,0-.764-2.407,2.69,2.69,0,0,0-1.923-.714,4.076,4.076,0,0,0-3.109,1.587V19.35Z" fill="#ffffff" fill-rule="evenodd"/><path d="M102.586,6.259A7.5,7.5,0,0,0,97.419,19.21a1.481,1.481,0,0,0,1.926.1,5.355,5.355,0,0,1,6.394,0,1.485,1.485,0,0,0,1.937-.113,7.5,7.5,0,0,0-5.09-12.94M102.542,17.5a3.637,3.637,0,0,1-3.734-3.733,3.734,3.734,0,1,1,7.468,0,3.637,3.637,0,0,1-3.734,3.733" fill="#62d84e" fill-rule="evenodd"/><polygon points="116.788 19.35 114.237 19.35 109.15 6.523 112.57 6.523 115.359 13.853 118.094 6.523 120.952 6.523 123.662 13.853 126.475 6.523 129.896 6.523 124.809 19.35 122.258 19.35 119.523 12.046 116.788 19.35" fill="#ffffff" fill-rule="evenodd"/><path d="M129.935,17.9h-.289v.543H129.4V16.957h.6a.476.476,0,0,1,.478.478.469.469,0,0,1-.295.432l.338.579h-.268Zm-.289-.219H130a.249.249,0,0,0,0-.5h-.351Z" fill="#ffffff"/><path d="M129.9,16.348a1.379,1.379,0,1,1-1.378,1.379,1.381,1.381,0,0,1,1.378-1.379m0-.218a1.6,1.6,0,1,0,1.6,1.6,1.6,1.6,0,0,0-1.6-1.6Z" fill="#ffffff"/></svg><span class="pill">Hackathon</span></a>
+<nav class="nav-links"><a href="index.html#guides">Guides</a><a class="hide-sm" href="index.html#example">Example app</a><a href="planning-template.html" class="btn btn-primary btn-small">Planning template</a></nav></header><div class="layout"><aside class="side"><p class="label">Guides</p><ol><li class=""><a href="01-plan-your-app.html"><span class="n">1</span><span class="t">Plan your app</span></a></li><li class=""><a href="planning-template.html"><span class="n">T</span><span class="t">Team planning template</span></a></li><li class=""><a href="02-getting-started.html"><span class="n">2</span><span class="t">Getting started</span></a></li><li class="on"><a href="03-writing-good-prompts.html"><span class="n">3</span><span class="t">Writing good prompts</span></a></li><li class=""><a href="04-building-and-iterating.html"><span class="n">4</span><span class="t">Building, testing and getting demo-ready</span></a></li><li class=""><a href="05-adding-an-agent-or-skill.html"><span class="n">5</span><span class="t">Adding an agent or skill</span></a></li></ol><p class="label">On this page</p><nav class="toc"><a href="#six-habits-that-work">Six habits that work</a><a href="#from-plan-to-prompts">From plan to prompts</a><a href="#worked-example-workplace-issue-reporter">Worked example: Workplace Issue Reporter</a><a href="#more-useful-prompts">More useful prompts</a></nav></aside><article><div class="page-hero reveal"><div class="icon-box"><img src="assets/icons/chat.svg" alt=""></div><div><p class="eyebrow">Guide 3 &middot; 15 min read</p><h1><span class="g">Writing good</span> prompts</h1></div></div><div class="prose"><p>The quality of what Build Agent builds depends on the quality of your brief. Treat it like a capable developer who's just joined your team: it knows the platform well, but it only knows your problem from what you tell it.</p>
+<p>The good news: if you've completed your <a href="planning-template.html">planning template</a>, you've already written most of your brief. This guide shows you how to turn it into prompts, using a worked example.</p>
+<h2 id="six-habits-that-work">Six habits that work</h2>
+<p><strong>1. Be comprehensive.</strong> One detailed prompt beats several vague ones. Include the tables, fields, roles and automation you need in a single prompt.</p>
+<p><strong>2. Use platform terms where you can.</strong> Say <em>"a reference field to sys_user"</em> rather than <em>"a field for who ordered it"</em>. Naming tables, fields, roles and record types gets you a more accurate first attempt. Conversational prompts are fine early on; get more precise as you build.</p>
+<p><strong>3. Plan first for anything complex.</strong> Ask Build Agent to create a plan before it builds. Review it as a team, then approve.</p>
+<p><strong>4. Let it interview you.</strong> If something is still unclear, ask Build Agent to ask you questions first. This works better than guessing at details.</p>
+<p><strong>5. Draft offline.</strong> Write your prompt in a text editor or shared doc, refine it as a team, then paste it in.</p>
+<p><strong>6. One feature per conversation.</strong> Build and test one feature, then start a new conversation for the next. Long conversations that try to do everything get confused.</p>
+<h2 id="from-plan-to-prompts">From plan to prompts</h2>
+<p>Each section of your planning template feeds a different prompt. Work through them in this order:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Order</th>
+<th>Prompt</th>
+<th>Built from template section</th>
+<th>New conversation?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Review the plan</td>
+<td>The whole template</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Build the foundation: data and roles</td>
+<td>2, 5, 9</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Add the process</td>
+<td>6</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Add the rules</td>
+<td>7</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Add notifications</td>
+<td>6</td>
+<td>Same as 4, or new</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Shape the user experience</td>
+<td>8</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Create test data</td>
+<td>10</td>
+<td>Same as 6, or new</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Test the scenarios</td>
+<td>10</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>9 onwards</td>
+<td>Add a skill or an agent</td>
+<td>13</td>
+<td>Yes (<a href="05-adding-an-agent-or-skill.html">Guide 5</a>)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sections 1, 3, 11 and 12 (the problem, the finished product, value and risks) don't become features. They give Build Agent context in prompt 1, and they become your pitch.</p>
+<div class="callout callout-info"><div class="callout-label">Tip</div>
+<p><strong>Studio or IDE?</strong> In ServiceNow Studio, paste the relevant parts of your plan straight into the chat. If your team is using the ServiceNow IDE, you can also save your plan as a Markdown file in your project and ask Build Agent to use it as context throughout the session.</p>
+</div>
+<h2 id="worked-example-workplace-issue-reporter">Worked example: Workplace Issue Reporter</h2>
+<p>Here's a completed planning template for an example app, followed by the prompts that build it. <a href="05-adding-an-agent-or-skill.html">Guide 5</a> continues the same example by adding an AI skill and agent. Use it as a model for your own.</p>
+<h3 id="the-completed-plan">The completed plan</h3>
+<p><strong>1. The problem</strong>
+Employees report office problems such as broken lights, faulty desks and heating failures by email, chat messages or by stopping someone in the corridor. Reports get lost, the same problem is reported five times, and nobody knows whether anything is happening. The facilities coordinator spends the first hour of every day reading and forwarding messages.
+<em>In one sentence:</em> Office problems are reported in too many places, so they're slow to reach the right team and people never hear back.</p>
+<p><strong>2. The people</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Role</th>
+<th>What they need to do</th>
+<th>How often</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reporter (any employee)</td>
+<td>Report a problem, check its progress, hear when it's fixed</td>
+<td>Occasionally</td>
+</tr>
+<tr>
+<td>Fixer (member of a facilities team)</td>
+<td>See issues for their team, update progress, resolve them</td>
+<td>Daily</td>
+</tr>
+<tr>
+<td>Coordinator</td>
+<td>Review new issues, correct category or priority, manage teams</td>
+<td>Daily</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>3. The finished product</strong>
+<em>Headline:</em> Anyone can report an office problem in 30 seconds, and it reaches the right team without anyone sorting an inbox.
+<em>Demo story:</em></p>
+<ol>
+<li>Alex notices the heating isn't working in meeting room 3B and reports it in a couple of sentences.</li>
+<li>
+<p>The issue is categorised as Heating and cooling, marked High priority, and routed to the Building services team. Two similar reports from the same floor are flagged as possible duplicates.</p>
+</li>
+<li>
+<p>Jordan in Building services picks it up, fixes it, and resolves it with a note.</p>
+</li>
+<li>Alex gets a notification that it's fixed.</li>
+</ol>
+<p><strong>4. Scope</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Must have (day 1)</th>
+<th>Should have (day 2)</th>
+<th>Won't have</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Issue table, report form, routing by category, resolve with notes</td>
+<td>Notifications, "My issues" list, coordinator and team views, AI triage skill and agent</td>
+<td>Mobile app, building management system integration, reporting dashboards</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>5. Data</strong></p>
+<p><em>Issue</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Choices or referenced table</th>
+<th>Mandatory?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number</td>
+<td>Auto-number (prefix WPI)</td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Short description</td>
+<td>Text</td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>Long text</td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>Reference</td>
+<td>cmn_location</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Category</td>
+<td>Choice</td>
+<td>Electrical, Plumbing, Heating and cooling, Furniture, Cleaning, Other</td>
+<td>No (set during triage)</td>
+</tr>
+<tr>
+<td>Priority</td>
+<td>Choice</td>
+<td>1 - Urgent, 2 - High, 3 - Normal, 4 - Low (default Normal)</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>State</td>
+<td>Choice</td>
+<td>New, Assigned, In progress, On hold, Resolved, Closed</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Reported by</td>
+<td>Reference</td>
+<td>sys_user (default: current user)</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Assignment group</td>
+<td>Reference</td>
+<td>sys_user_group</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Assigned to</td>
+<td>Reference</td>
+<td>sys_user</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Resolution notes</td>
+<td>Long text</td>
+<td></td>
+<td>When resolved</td>
+</tr>
+<tr>
+<td>Work notes</td>
+<td>Journal</td>
+<td></td>
+<td>No</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>Category routing</em></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Choices or referenced table</th>
+<th>Mandatory?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Category</td>
+<td>Choice</td>
+<td>Same choices as on Issue</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Assignment group</td>
+<td>Reference</td>
+<td>sys_user_group</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table></div>
+<p><em>Relationship:</em> Each category routes to one assignment group. Many issues can share a location.</p>
+<p><strong>6. The process</strong></p>
+<ul>
+<li><em>Trigger:</em> A reporter submits an issue. It starts in the New state.</li>
+<li><em>Steps:</em> When a category is set, the issue is assigned to that category's group and moves to Assigned. A fixer sets it to In progress, then to Resolved with resolution notes. The reporter can confirm the fix to close it; the coordinator can also close it.</li>
+<li><em>States:</em> New → Assigned → In progress → (On hold) → Resolved → Closed.</li>
+<li><em>Notifications:</em> The reporter when the issue is resolved; the coordinator straight away for anything Urgent; the assignment group when an issue is assigned to them.</li>
+</ul>
+<p><strong>7. Rules and logic</strong></p>
+<ul>
+<li>When the category is set or changed, set the assignment group from the Category routing table and set the state to Assigned.</li>
+<li>Never allow an issue to be resolved without resolution notes.</li>
+<li>Assigned to must be a member of the assignment group.</li>
+<li>Reporters can't change the priority, category or assignment.</li>
+</ul>
+<p><strong>8. Where people work</strong></p>
+<ul>
+<li><em>Reporters:</em> a short report form (short description, description, location) and a "My issues" list.</li>
+<li><em>Fixers:</em> a list of open issues assigned to their groups.</li>
+<li><em>Coordinator:</em> a list of New issues, and all open issues grouped by location.</li>
+</ul>
+<p><strong>9. Who can see and do what</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Create</th>
+<th>Read</th>
+<th>Update</th>
+<th>Delete</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reporter</td>
+<td>Issues</td>
+<td>Own issues</td>
+<td>Own issues: description only, and confirming a fix</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Fixer</td>
+<td>None</td>
+<td>All issues</td>
+<td>Issues assigned to their groups</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Coordinator</td>
+<td>Issues, Category routing</td>
+<td>All</td>
+<td>All issues and Category routing</td>
+<td>Category routing</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>10. Test scenarios</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Expected result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Report an issue as a reporter</td>
+<td>Issue created as New; appears in the coordinator's list</td>
+</tr>
+<tr>
+<td>Coordinator sets the category to Plumbing</td>
+<td>Assigned to Building services; state is Assigned</td>
+</tr>
+<tr>
+<td>Fixer resolves an issue with no resolution notes</td>
+<td>Blocked with a clear message</td>
+</tr>
+<tr>
+<td>Report an Urgent issue</td>
+<td>Coordinator notified straight away</td>
+</tr>
+<tr>
+<td>Reporter tries to change the assignment group</td>
+<td>Not allowed</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>11. How you'll show value</strong>
+We'd measure time from report to assignment (currently up to a day), the number of duplicate reports, and how often people chase for updates.</p>
+<p><strong>12. Assumptions and risks</strong>
+Assumes each category maps to one team. Location data already exists on the platform. Integration with building systems is out of scope.</p>
+<p><strong>13. Where could AI help?</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Where people spend time today</th>
+<th>What AI could do</th>
+<th>Skill or agent?</th>
+<th>What a person stays in control of</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The coordinator reads every new report to choose a category and priority</td>
+<td>Read the description and suggest a category, priority and one-line summary</td>
+<td>Skill</td>
+<td>The coordinator can change any suggestion</td>
+</tr>
+<tr>
+<td>Several people report the same problem</td>
+<td>Find similar open issues at the same location and flag possible duplicates</td>
+<td>Agent (uses the skill)</td>
+<td>The coordinator decides whether to merge or close duplicates</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="the-prompts">The prompts</h3>
+<p>Here's how the team turns that plan into prompts. Notice how each prompt copies wording straight from the template.</p>
+<h4 id="prompt-1-review-the-plan">Prompt 1: Review the plan</h4>
+<p>Start here. Paste in your whole plan and ask Build Agent to check it before anything is built.</p>
+<div class="prompt"><div class="bar"><span>Prompt</span><button class="copy" type="button">Copy prompt</button></div><pre><code>We're building an app at a hackathon. Below is our team's plan.
+Don't build anything yet.
+
+Please:
+1. Summarise what you understand we want to build.
+2. Point out any gaps, contradictions or risks in the plan.
+3. Ask us any questions you need answered, one at a time.
+4. Suggest the order we should build it in, one feature per step.
+
+[Paste your completed planning template here]
+</code></pre></div>
+<p>Answer its questions, update your template with anything you've learned, and then mark this conversation complete.</p>
+<h4 id="prompt-2-build-the-foundation-data-and-roles">Prompt 2: Build the foundation (data and roles)</h4>
+<div class="prompt"><div class="bar"><span>Prompt</span><button class="copy" type="button">Copy prompt</button></div><pre><code>Create a scoped app called Workplace Issue Reporter.
+
+Purpose: let employees report office problems in one place and route
+them to the right facilities team.
+
+Roles:
+- workplace_reporter: can create issues and read their own issues.
+- workplace_fixer: can read all issues and update issues assigned to
+  their groups.
+- workplace_coordinator: can read and update all issues, and manage
+  the Category routing table.
+
+Tables:
+1. Issue, with fields:
+   - Number (auto-number with prefix WPI)
+   - Short description (string, mandatory)
+   - Description (long string, mandatory)
+   - Location (reference to cmn_location, mandatory)
+   - Category (choice: Electrical, Plumbing, Heating and cooling,
+     Furniture, Cleaning, Other)
+   - Priority (choice: 1 - Urgent, 2 - High, 3 - Normal, 4 - Low;
+     default 3 - Normal)
+   - State (choice: New, Assigned, In progress, On hold, Resolved,
+     Closed; default New)
+   - Reported by (reference to sys_user, default current user)
+   - Assignment group (reference to sys_user_group)
+   - Assigned to (reference to sys_user)
+   - Resolution notes (long string)
+   - Work notes (journal input field, visible to fixers and coordinators)
+2. Category routing, with fields:
+   - Category (same choices as Issue, mandatory, unique)
+   - Assignment group (reference to sys_user_group, mandatory)
+
+Set up access controls to match the roles above.
+Create a plan first and wait for my approval before building.
+</code></pre></div>
+<p><strong>What's happening:</strong> This uses sections 2, 5 and 9. The roles and tables are the foundation, so build and check them before adding any behaviour. Open both tables and check the fields before moving on.</p>
+<h4 id="prompt-3-add-the-process">Prompt 3: Add the process</h4>
+<div class="prompt"><div class="bar"><span>Prompt</span><button class="copy" type="button">Copy prompt</button></div><pre><code>In the Workplace Issue Reporter app, add the issue process:
+
+- New issues start in the New state.
+- When the Category is set or changed, look up the Assignment group
+  in the Category routing table, set it on the issue, and set the
+  State to Assigned.
+- Fixers can move an issue to In progress, On hold or Resolved.
+- The reporter can confirm a Resolved issue is fixed, which sets the
+  State to Closed. The coordinator can also close Resolved issues.
+
+Don't change the table structure. Show me the plan before making changes.
+</code></pre></div>
+<p><strong>What's happening:</strong> This uses section 6. The "Don't change..." line protects the foundation you've already tested.</p>
+<h4 id="prompt-4-add-the-rules">Prompt 4: Add the rules</h4>
+<div class="prompt"><div class="bar"><span>Prompt</span><button class="copy" type="button">Copy prompt</button></div><pre><code>In the Workplace Issue Reporter app, add these rules to the Issue
+table. Each should stop the record being saved and show a clear
+message to the user:
+
+1. Never allow an issue to be set to Resolved without Resolution notes.
+2. Assigned to must be a member of the Assignment group.
+3. Users with only the workplace_reporter role can't change Priority,
+   Category, Assignment group or Assigned to.
+
+Show me the plan before making changes.
+</code></pre></div>
+<p><strong>What's happening:</strong> Section 7, copied almost word for word. Writing rules as sentences in the template makes this step easy.</p>
+<h4 id="prompt-5-add-notifications">Prompt 5: Add notifications</h4>
+<div class="prompt"><div class="bar"><span>Prompt</span><button class="copy" type="button">Copy prompt</button></div><pre><code>In the Workplace Issue Reporter app, add these notifications:
+- Email the Reported by user when their issue is Resolved, including
+  the Resolution notes and a reminder to confirm the fix.
+- Email users with the workplace_coordinator role as soon as an issue
+  is created or changed to 1 - Urgent.
+- Email the Assignment group when an issue is assigned to them.
+</code></pre></div>
+<h4 id="prompt-6-shape-the-user-experience">Prompt 6: Shape the user experience</h4>
+<p>Attach the photo of your screen sketches to this prompt.</p>
+<div class="prompt"><div class="bar"><span>Prompt</span><button class="copy" type="button">Copy prompt</button></div><pre><code>In the Workplace Issue Reporter app, improve the experience for each
+role. I've attached our sketches.
+
+For reporters:
+- A short report form with only Short description, Description and
+  Location.
+- A &quot;My issues&quot; list showing their issues, newest first, with State.
+
+For fixers:
+- A list of open issues assigned to their groups, highest priority
+  first.
+
+For coordinators:
+- A list of New issues.
+- All open issues grouped by Location.
+
+Show me the plan before making changes.
+</code></pre></div>
+<p><strong>What's happening:</strong> Section 8. Sketches and screenshots help Build Agent match what you have in mind.</p>
+<h4 id="prompt-7-create-test-data">Prompt 7: Create test data</h4>
+<div class="prompt"><div class="bar"><span>Prompt</span><button class="copy" type="button">Copy prompt</button></div><pre><code>Create sample data for the Workplace Issue Reporter app so we can
+test it. Use fictional names and values only.
+
+- 3 assignment groups: Building services, Workplace team and
+  Cleaning services.
+- Category routing records: Electrical, Plumbing and Heating and
+  cooling to Building services; Furniture and Other to Workplace team;
+  Cleaning to Cleaning services.
+- 3 locations, if none exist.
+- 4 test users: 2 with workplace_reporter, 1 with workplace_fixer (a
+  member of Building services) and 1 with workplace_coordinator.
+- 15 issues across every State and Category, written the way real
+  people describe problems. Include 3 issues about the same heating
+  problem at the same location, and a few with no Category yet.
+</code></pre></div>
+<p><strong>What's happening:</strong> The realistic descriptions and the deliberate duplicates matter. They're what the AI skill and agent in <a href="05-adding-an-agent-or-skill.html">Guide 5</a> will work on.</p>
+<h4 id="prompt-8-test-the-scenarios">Prompt 8: Test the scenarios</h4>
+<div class="prompt"><div class="bar"><span>Prompt</span><button class="copy" type="button">Copy prompt</button></div><pre><code>Here are our test scenarios for the Workplace Issue Reporter app:
+
+[Paste the table from section 10 of your plan]
+
+For each scenario, tell us how to test it manually step by step,
+including which test user to log in as. Then suggest automated tests
+we could add.
+</code></pre></div>
+<p><strong>What's happening:</strong> Section 10. Run through each scenario yourself. If one fails, describe what happened in a new prompt, or roll back to a checkpoint (see <a href="04-building-and-iterating.html">Guide 4</a>).</p>
+<h3 id="day-2-building-on-what-works">Day 2: building on what works</h3>
+<p>Once your "must have" scope is working and tested, move on to your "should have" list, one feature per conversation, using the same pattern as Prompt 3:</p>
+<div class="prompt"><div class="bar"><span>Prompt</span><button class="copy" type="button">Copy prompt</button></div><pre><code>In the [App name] app, add [feature from your &quot;should have&quot; list].
+It should [expected behaviour].
+Don't change [anything that must stay as it is].
+Show me the plan before you make changes.
+</code></pre></div>
+<p>When the core app works, continue to <a href="05-adding-an-agent-or-skill.html">Guide 5</a> to add AI.</p>
+<h2 id="more-useful-prompts">More useful prompts</h2>
+<p><strong>When you're not sure how to describe something:</strong></p>
+<div class="prompt"><div class="bar"><span>Prompt</span><button class="copy" type="button">Copy prompt</button></div><pre><code>I want to [goal]. Suggest the ideal prompt I should give you to build
+this, and tell me about any common pitfalls.
+</code></pre></div>
+<p><strong>When a part of your plan is still fuzzy:</strong></p>
+<div class="prompt"><div class="bar"><span>Prompt</span><button class="copy" type="button">Copy prompt</button></div><pre><code>We want the app to [rough idea]. Before you plan anything, interview me.
+Ask one question at a time until you understand what we need, then
+summarise it back to me.
+</code></pre></div>
+<p><strong>When something on screen looks wrong:</strong> attach a screenshot.</p>
+<div class="prompt"><div class="bar"><span>Prompt</span><button class="copy" type="button">Copy prompt</button></div><pre><code>Here's a screenshot of [page or form]. [What's wrong, e.g. the Location
+field should be at the top, and the Description field is missing].
+Please fix this.
+</code></pre></div>
+<p><strong>When you want to understand what was built:</strong></p>
+<div class="prompt"><div class="bar"><span>Prompt</span><button class="copy" type="button">Copy prompt</button></div><pre><code>Explain how the [feature] in this app works, which records you created
+for it, and where I can find them.
+</code></pre></div><div class="sources"><div class="callout-label">Sources</div><p>(ServiceNow product documentation):
+<a href="https://www.servicenow.com/docs/r/zurich/application-development/build-agent-general-guidelines.html">General guidelines for Build Agent</a> ·
+<a href="https://www.servicenow.com/docs/r/guL1zqmJkV9eywMq_6qu~w/UleTyvUoijoVlKctk4womg">Create an application using Build Agent</a></p></div></div><nav class="pager"><a class="card prev" href="02-getting-started.html"><div class="dir">Previous</div><div class="t">Getting started</div></a><a class="card next" href="04-building-and-iterating.html"><div class="dir">Next</div><div class="t">Building, testing and getting demo-ready</div></a></nav></article></div></div><footer class="site">&copy; 2026 ServiceNow, Inc. All rights reserved.</footer><script src="assets/site.js"></script></body></html>
